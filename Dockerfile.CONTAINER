@@ -1,0 +1,11 @@
+FROM python:3.10
+
+RUN mkdir /home/app/
+RUN mkdir /home/app/q-a_app
+
+COPY  requirements.txt /home/app/q-a_app/
+
+RUN python -m pip install -r requirements.txt --src /usr/local/src
+
+EXPOSE 3000
+CMD /bin/bash -l -c "passenger start --address 0.0.0.0 --port 3000 --max-pool-size 10 --min-instances 4 --max-requests 50 --max-request-queue-size 200 --python /usr/bin/python3.9 --app_type wsgi --startup_file passenger_wsgi.py"
