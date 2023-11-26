@@ -3,8 +3,7 @@
 </h1>
 
 ## Description
-The application demonstrates a very simple RAG Pattern described in - https://python.langchain.com/docs/use_cases/question_answering/
-There are 5 basic Steps to the process- 
+The application demonstrates a very simple 5 Step RAG Pattern described in - https://python.langchain.com/docs/use_cases/question_answering/
 1. Load
 2. Split
 3. Store
@@ -28,8 +27,14 @@ There are 5 basic Steps to the process-
 ## Response Format
 ```shell
 [
-    "What is my name?": "I dont know your name.",
-    "What is your name? Tell me, please senpai!": "My Name is Heisenberg",
-    "Is it cloudy with a chance of meatballs?": "Based on my calculations there is a 3.14% chance of pie."
+    {
+        "What is my name?": "I dont know your name."
+    },
+    {
+        "What is your name? Tell me, please senpai!": "My Name is Heisenberg"
+    },
+    {
+        "Is it cloudy with a chance of meatballs?": "Based on my calculations there is a 3.14% chance of pie."
+    }
 ]
 ```
