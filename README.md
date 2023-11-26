@@ -38,3 +38,6 @@ The application demonstrates a very simple 5 Step RAG Pattern described in - htt
     }
 ]
 ```
+
+## Pre-Requisites - Environment Variables
+OPENAI_API_KEY - OpenAI API Key from your OpenAI Account
