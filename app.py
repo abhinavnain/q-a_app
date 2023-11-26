@@ -1,4 +1,11 @@
-import os
+"""
+    Overriding Default SQL Lite Setup for Chroma.
+"""
+
+__import__('pysqlite3')
+import os, sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 ### SET ROOT ENV VARIABLE
 os.environ['env_name'] = 'dev'
 #########################

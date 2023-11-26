@@ -1,6 +1,7 @@
-import flask
+import flask, logging
 from flask import Blueprint, request, Response
-from lib.file_processor.remote_file_processor import RemoteFileProcessor
+#from lib.file_processor.remote_file_processor import RemoteFileProcessor
+from lib.lanchain_utils.lanchain_simple_pipeline import LangchainSimplePipeline
 
 """
     GUIDE - 
@@ -15,9 +16,13 @@ from lib.file_processor.remote_file_processor import RemoteFileProcessor
 api = Blueprint("Question&AnswerAPI",__name__)
 @api.route('/ask', methods = ["POST"])
 def ask():
-    print(request.json)
-    file_data = RemoteFileProcessor(request.json["file_path"])
-    file_data.get_file()
-    print(file_data._file_data)
-    resp = flask.make_response({"FOUND":"IT"})
+    file_type = request.json['file_path'].split(".")[-1].lower()
+    lcp = LangchainSimplePipeline(request.json['file_path'], file_type)
+    response = []
+    for question in request.json['questions']:
+        answer = lcp.ask(question)
+        logging.warning("Q: {}".format(question))
+        logging.warning("A: {}".format(answer))
+        response.append({question : answer})
+    resp = flask.make_response(response)
     return resp
