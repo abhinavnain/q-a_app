@@ -1,0 +1,14 @@
+## Production Dockerfile.
+## The Setup will change based on System Requirements.
+FROM python:3.10
+
+RUN mkdir /home/app/
+RUN mkdir /home/app/q-a_app
+
+COPY  requirements.txt /home/app/q-a_app/
+
+RUN python -m pip install -r requirements.txt --src /usr/local/src
+
+EXPOSE 3000
+CMD /bin/bash -l -c "uwsgi --http :3000 -w app:app --master --processes 4 --threads 2 --queue 200 --enable-threads"
+### FOR PRODUCTION SERVER 
